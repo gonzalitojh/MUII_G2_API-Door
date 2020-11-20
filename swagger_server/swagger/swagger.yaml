@@ -1,0 +1,224 @@
+openapi: 3.0.1
+info:
+  title: Door Management API
+  description: This API offers services of control over doors.
+  contact:
+    name: G2 - Family Lock
+    url: https://s-computing.blogspot.com/2020/09/familylock.html
+    email: g2_family_lock@gmail.com
+  license:
+    name: CC-BY-NC-CA-4.0
+    url: https://creativecommons.org/licenses/by-nc/4.0/
+  version: "1.0"
+servers:
+- url: http://door.familylock.es
+  description: Production server
+- url: http://beta.door.familylock.es
+  description: Beta server
+paths:
+  /door/{id}:
+    get:
+      tags:
+      - Door
+      summary: Get a door state
+      description: Get a door state
+      operationId: get_door_state
+      parameters:
+      - name: id
+        in: path
+        description: ID of door
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+        example: "3"
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                title: state
+                type: string
+                example: closed
+                x-content-type: text/plain
+            application/json:
+              schema:
+                title: state
+                type: string
+                example: '{"state":"closed"}'
+        "404":
+          description: Not found response
+          content:
+            text/plain:
+              schema:
+                title: Endpoint not found
+                type: string
+                example: Not found
+                x-content-type: text/plain
+      x-swagger-router-controller: LegitimatePerson
+      x-openapi-router-controller: openapi_server.controllers.legitimate_person_controller
+    delete:
+      tags:
+      - Door
+      summary: Delete a door
+      description: Delete a door
+      operationId: delete_door
+      parameters:
+      - name: id
+        in: path
+        description: ID of door
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+        example: "3"
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                title: OK
+                type: string
+                example: OK
+                x-content-type: text/plain
+        "404":
+          description: Not found response
+          content:
+            text/plain:
+              schema:
+                title: Endpoint not found
+                type: string
+                example: Not found
+                x-content-type: text/plain
+      x-swagger-router-controller: LegitimatePerson
+      x-openapi-router-controller: openapi_server.controllers.legitimate_person_controller
+  /door:
+    get:
+      tags:
+      - Door
+      summary: Get all doors state
+      description: Get all doors state
+      operationId: get_all_doors_state
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                title: OK
+                type: string
+                example: '[{"id":"1","name":"Main door","state":"closed"}]'
+                x-content-type: application/json
+        "404":
+          description: Not found response
+          content:
+            text/plain:
+              schema:
+                title: Endpoint not found
+                type: string
+                example: Not found
+                x-content-type: text/plain
+      x-swagger-router-controller: LegitimatePerson
+      x-openapi-router-controller: openapi_server.controllers.legitimate_person_controller
+    put:
+      tags:
+      - Door
+      summary: Update door state
+      description: Update door state
+      operationId: update_door_state
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDoor'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                title: OK
+                type: string
+                example: OK
+                x-content-type: text/plain
+        "404":
+          description: Not found response
+          content:
+            text/plain:
+              schema:
+                title: Endpoint not found
+                type: string
+                example: Not found
+                x-content-type: text/plain
+      x-swagger-router-controller: LegitimatePerson
+      x-openapi-router-controller: openapi_server.controllers.legitimate_person_controller
+    post:
+      tags:
+      - Door
+      summary: Add a new door to the system
+      description: Add a new door to the system
+      operationId: add_door
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Door'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                title: OK
+                type: string
+                example: OK
+                x-content-type: text/plain
+        "404":
+          description: Not found response
+          content:
+            text/plain:
+              schema:
+                title: Endpoint not found
+                type: string
+                example: Not found
+                x-content-type: text/plain
+      x-swagger-router-controller: LegitimatePerson
+      x-openapi-router-controller: openapi_server.controllers.legitimate_person_controller
+components:
+  schemas:
+    Door:
+      type: object
+      properties:
+        name:
+          type: string
+      example:
+        name: Main door
+      x-body-name: visit
+    UpdateDoor:
+      type: object
+      properties:
+        id:
+          type: integer
+        state:
+          type: string
+      example:
+        id: "1"
+        state: Open
+      x-body-name: visit
+  responses:
+    "404NotFound":
+      description: Not found response
+      content:
+        text/plain:
+          schema:
+            title: Endpoint not found
+            type: string
+            example: Not found
+            x-content-type: text/plain
+
