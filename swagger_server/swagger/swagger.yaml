@@ -57,8 +57,8 @@ paths:
                 type: string
                 example: Not found
                 x-content-type: text/plain
-      x-swagger-router-controller: LegitimatePerson
-      x-openapi-router-controller: openapi_server.controllers.legitimate_person_controller
+      x-swagger-router-controller: Door
+      x-openapi-router-controller: swagger_server.controllers.door_controller
     delete:
       tags:
       - Door
@@ -94,8 +94,8 @@ paths:
                 type: string
                 example: Not found
                 x-content-type: text/plain
-      x-swagger-router-controller: LegitimatePerson
-      x-openapi-router-controller: openapi_server.controllers.legitimate_person_controller
+      x-swagger-router-controller: Door
+      x-openapi-router-controller: swagger_server.controllers.door_controller
   /door:
     get:
       tags:
@@ -122,8 +122,8 @@ paths:
                 type: string
                 example: Not found
                 x-content-type: text/plain
-      x-swagger-router-controller: LegitimatePerson
-      x-openapi-router-controller: openapi_server.controllers.legitimate_person_controller
+      x-swagger-router-controller: Door
+      x-openapi-router-controller: swagger_server.controllers.door_controller
     put:
       tags:
       - Door
@@ -155,8 +155,8 @@ paths:
                 type: string
                 example: Not found
                 x-content-type: text/plain
-      x-swagger-router-controller: LegitimatePerson
-      x-openapi-router-controller: openapi_server.controllers.legitimate_person_controller
+      x-swagger-router-controller: Door
+      x-openapi-router-controller: swagger_server.controllers.door_controller
     post:
       tags:
       - Door
@@ -188,8 +188,8 @@ paths:
                 type: string
                 example: Not found
                 x-content-type: text/plain
-      x-swagger-router-controller: LegitimatePerson
-      x-openapi-router-controller: openapi_server.controllers.legitimate_person_controller
+      x-swagger-router-controller: Door
+      x-openapi-router-controller: swagger_server.controllers.door_controller
 components:
   schemas:
     Door:

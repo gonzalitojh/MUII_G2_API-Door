@@ -6,7 +6,7 @@ from swagger_server.models.update_door import UpdateDoor  # noqa: E501
 from swagger_server import util
 
 
-def add_door(body):  # noqa: E501
+def add_door(visit):  # noqa: E501
     """Add a new door to the system
 
     Add a new door to the system # noqa: E501
@@ -58,7 +58,7 @@ def get_door_state(id):  # noqa: E501
     return 'do some magic!'
 
 
-def update_door_state(body):  # noqa: E501
+def update_door_state(visit):  # noqa: E501
     """Update door state
 
     Update door state # noqa: E501
