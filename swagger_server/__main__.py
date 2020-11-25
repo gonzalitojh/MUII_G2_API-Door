@@ -10,11 +10,10 @@ import swagger_server.commands as commands
 
 def main():
     app = connexion.App(__name__, specification_dir='./swagger/')
-    app.app.config.from_object(os.environ['APP_SETTINGS'])
+    app.app.config.from_object("config.DevelopmentConfig")
     # setup all our dependencies, for now only database using application factory pattern
-    database.init_app(app)
-    commands.init_app(app)
-    database.init_app(app)
+    database.init_app(app.app)
+    commands.init_app(app.app)
 
     app.run(port=8080)
 
