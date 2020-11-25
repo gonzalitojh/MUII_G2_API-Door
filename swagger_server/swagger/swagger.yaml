@@ -10,11 +10,6 @@ info:
     name: CC-BY-NC-CA-4.0
     url: https://creativecommons.org/licenses/by-nc/4.0/
   version: "1.0"
-servers:
-- url: http://door.familylock.es
-  description: Production server
-- url: http://beta.door.familylock.es
-  description: Beta server
 paths:
   /door/{id}:
     get:
@@ -199,7 +194,7 @@ components:
           type: string
       example:
         name: Main door
-      x-body-name: visit
+      x-body-name: door
     UpdateDoor:
       type: object
       properties:
@@ -208,9 +203,9 @@ components:
         state:
           type: string
       example:
-        id: "1"
-        state: Open
-      x-body-name: visit
+        id: 1
+        state: "Open"
+      x-body-name: door
   responses:
     "404NotFound":
       description: Not found response
