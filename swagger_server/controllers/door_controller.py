@@ -1,7 +1,7 @@
 import connexion
 import six
 
-from ..__main__ import db
+from swagger_server.database import db
 
 from swagger_server.models.door import Door  # noqa: E501
 from swagger_server.models.update_door import UpdateDoor  # noqa: E501

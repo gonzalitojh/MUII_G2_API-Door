@@ -3,7 +3,7 @@
 from __future__ import absolute_import
 from datetime import date, datetime  # noqa: F401
 
-from ..__main__ import db
+from swagger_server.database import db
 
 import json
 
