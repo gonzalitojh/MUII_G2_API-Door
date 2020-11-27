@@ -37,7 +37,7 @@ def add_door(door):  # noqa: E501
 
     try:
         postgres_insert_query = '''INSERT INTO door (name) VALUES (%s)'''
-        cursor.execute(postgres_insert_query, (door.name,))
+        response = cursor.execute(postgres_insert_query, (door.name,))
 
         connection.commit()
         count = cursor.rowcount
@@ -54,7 +54,7 @@ def add_door(door):  # noqa: E501
             connection.close()
             print("PostgreSQL connection is closed")
 
-    return 'do some magic!'
+    return response
 
 
 def delete_door(door_id):  # noqa: E501
