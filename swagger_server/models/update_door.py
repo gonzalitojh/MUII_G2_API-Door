@@ -24,7 +24,7 @@ class UpdateDoor(Model):
         """
         self.swagger_types = {
             'id': int,
-            'name': int,
+            'name': str,
             'state': str
         }
 
