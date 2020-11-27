@@ -176,8 +176,14 @@ def update_door_state(door):  # noqa: E501
 
     :rtype: str
     """
+    print('##################################')
+    print(connexion.request.get_json())
+    print('##################################')
     if connexion.request.is_json:
         door = UpdateDoor.from_dict(connexion.request.get_json())  # noqa: E501
+    print('##################################')
+    print(door)
+    print('##################################')
 
     connection = psycopg2.connect(user=DATABASE_USER,
                                   password=DATABASE_PASSWORD,
