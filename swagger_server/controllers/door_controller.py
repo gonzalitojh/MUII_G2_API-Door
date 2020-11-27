@@ -26,7 +26,7 @@ def add_door(door):  # noqa: E501
     :rtype: str
     """
     if connexion.request.is_json:
-        _door = Door.from_dict(connexion.request.get_json())  # noqa: E501
+        door = Door.from_dict(connexion.request.get_json())  # noqa: E501
 
     connection = psycopg2.connect(user=DATABASE_USER,
                                       password=DATABASE_PASSWORD,
@@ -36,8 +36,8 @@ def add_door(door):  # noqa: E501
     cursor = connection.cursor()
 
     try:
-        postgres_insert_query = """ INSERT INTO door VALUES (%s)"""
-        cursor.execute(postgres_insert_query, _door.name)
+        postgres_insert_query = f""" INSERT INTO door VALUES (%s)"""
+        cursor.execute(postgres_insert_query, door.name)
         cursor.execute(postgres_insert_query, 'try')
 
         connection.commit()
@@ -106,5 +106,5 @@ def update_door_state(door):  # noqa: E501
     :rtype: str
     """
     if connexion.request.is_json:
-        body = UpdateDoor.from_dict(connexion.request.get_json())  # noqa: E501
+        door = UpdateDoor.from_dict(connexion.request.get_json())  # noqa: E501
     return 'do some magic!'
