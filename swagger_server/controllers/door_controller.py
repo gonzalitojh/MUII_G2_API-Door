@@ -29,20 +29,19 @@ def add_door(door):  # noqa: E501
         cursor = connection.cursor()
 
         postgres_insert_query = """ INSERT INTO door (name) VALUES (%s)"""
-        record_to_insert = (door.name)
-        cursor.execute(postgres_insert_query, record_to_insert)
+        cursor.execute(postgres_insert_query, door.name)
 
         connection.commit()
         count = cursor.rowcount
         print(count, "Record inserted successfully into mobile table")
 
     except (Exception, psycopg2.Error) as error:
-        if (connection):
+        if connection:
             print("Failed to insert record into mobile table", error)
 
     finally:
         # closing database connection.
-        if (connection):
+        if connection:
             cursor.close()
             connection.close()
             print("PostgreSQL connection is closed")
@@ -50,7 +49,7 @@ def add_door(door):  # noqa: E501
     return 'do some magic!'
 
 
-def delete_door(id_):  # noqa: E501
+def delete_door(id):  # noqa: E501
     """Delete a door
 
     Delete a door # noqa: E501
@@ -74,7 +73,7 @@ def get_all_doors_state():  # noqa: E501
     return 'do some magic!'
 
 
-def get_door_state(id_):  # noqa: E501
+def get_door_state(id):  # noqa: E501
     """Get a door state
 
     Get a door state # noqa: E501
