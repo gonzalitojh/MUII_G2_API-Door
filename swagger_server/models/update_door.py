@@ -70,6 +70,27 @@ class UpdateDoor(Model):
         self._id = id
 
     @property
+    def name(self) -> str:
+        """Gets the id of this UpdateDoor.
+
+
+        :return: The id of this UpdateDoor.
+        :rtype: int
+        """
+        return self._name
+
+    @id.setter
+    def name(self, name: str):
+        """Sets the id of this UpdateDoor.
+
+
+        :param id: The id of this UpdateDoor.
+        :type id: int
+        """
+
+        self._name = name
+
+    @property
     def state(self) -> str:
         """Gets the state of this UpdateDoor.
 
