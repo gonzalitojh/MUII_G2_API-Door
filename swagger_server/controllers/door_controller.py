@@ -67,7 +67,33 @@ def delete_door(id):  # noqa: E501
 
     :rtype: str
     """
-    return 'do some magic!'
+
+    connection = psycopg2.connect(user=DATABASE_USER,
+                                  password=DATABASE_PASSWORD,
+                                  host=DATABASE_HOST,
+                                  port="5432",
+                                  database=DATABASE_NAME)
+    cursor = connection.cursor()
+
+    try:
+        # Update single record now
+        sql_delete_query = """DELETE FROM door WHERE id = %s"""
+        cursor.execute(sql_delete_query, (id,))
+        connection.commit()
+        count = cursor.rowcount
+        print(count, "Record deleted successfully ")
+
+    except (Exception, psycopg2.Error) as error:
+        print("Error in Delete operation", error)
+
+    finally:
+        # closing database connection.
+        if connection:
+            cursor.close()
+            connection.close()
+            print("PostgreSQL connection is closed")
+
+    return 'Door deleted successfully'
 
 
 def get_all_doors_state():  # noqa: E501
@@ -78,7 +104,30 @@ def get_all_doors_state():  # noqa: E501
 
     :rtype: str
     """
-    return 'do some magic!'
+
+    connection = psycopg2.connect(user=DATABASE_USER,
+                                  password=DATABASE_PASSWORD,
+                                  host=DATABASE_HOST,
+                                  port="5432",
+                                  database=DATABASE_NAME)
+    cursor = connection.cursor()
+
+    try:
+        sql_select_query = """SELECT * FROM door"""
+        cursor.execute(sql_select_query)
+        record = cursor.fetchall()
+
+    except (Exception, psycopg2.Error) as error:
+        print("Error in update operation", error)
+
+    finally:
+        # closing database connection.
+        if connection:
+            cursor.close()
+            connection.close()
+            print("PostgreSQL connection is closed")
+
+    return record
 
 
 def get_door_state(id):  # noqa: E501
@@ -91,7 +140,30 @@ def get_door_state(id):  # noqa: E501
 
     :rtype: str
     """
-    return 'do some magic!'
+
+    connection = psycopg2.connect(user=DATABASE_USER,
+                                  password=DATABASE_PASSWORD,
+                                  host=DATABASE_HOST,
+                                  port="5432",
+                                  database=DATABASE_NAME)
+    cursor = connection.cursor()
+
+    try:
+        sql_select_query = """SELECT * FROM door WHERE id = %s"""
+        cursor.execute(sql_select_query, (id,))
+        record = cursor.fetchall()
+
+    except (Exception, psycopg2.Error) as error:
+        print("Error in update operation", error)
+
+    finally:
+        # closing database connection.
+        if connection:
+            cursor.close()
+            connection.close()
+            print("PostgreSQL connection is closed")
+
+    return record
 
 
 def update_door_state(door):  # noqa: E501
@@ -106,4 +178,30 @@ def update_door_state(door):  # noqa: E501
     """
     if connexion.request.is_json:
         door = UpdateDoor.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+
+    connection = psycopg2.connect(user=DATABASE_USER,
+                                  password=DATABASE_PASSWORD,
+                                  host=DATABASE_HOST,
+                                  port="5432",
+                                  database=DATABASE_NAME)
+    cursor = connection.cursor()
+
+    try:
+        # Update single record now
+        sql_update_query = """UPDATE door SET state = %s WHERE name = %s"""
+        cursor.execute(sql_update_query, (door.state, door.name))
+        connection.commit()
+        count = cursor.rowcount
+        print(count, "Record Updated successfully ")
+
+    except (Exception, psycopg2.Error) as error:
+        print("Error in update operation", error)
+
+    finally:
+        # closing database connection.
+        if connection:
+            cursor.close()
+            connection.close()
+            print("PostgreSQL connection is closed")
+
+    return 'Door updated successfully'
