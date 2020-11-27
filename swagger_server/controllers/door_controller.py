@@ -36,8 +36,8 @@ def add_door(door):  # noqa: E501
     cursor = connection.cursor()
 
     try:
-        postgres_insert_query = """ INSERT INTO door (name) VALUES (%s)"""
-        cursor.execute(postgres_insert_query, _door.name)
+        postgres_insert_query = """ INSERT INTO door (name, state) VALUES (%s)"""
+        cursor.execute(postgres_insert_query, (_door.name, _door.state))
 
         connection.commit()
         count = cursor.rowcount
