@@ -9,6 +9,10 @@ import os
 import psycopg2
 
 DATABASE_URL = os.environ['DATABASE_URL']
+DATABASE_HOST = os.environ['DATABASE_HOST']
+DATABASE_USER = os.environ['DATABASE_USER']
+DATABASE_PASSWORD = os.environ['DATABASE_PASSWORD']
+DATABASE_NAME = os.environ['DATABASE_NAME']
 
 
 def add_door(door):  # noqa: E501
@@ -24,7 +28,11 @@ def add_door(door):  # noqa: E501
     if connexion.request.is_json:
         _door = Door.from_dict(connexion.request.get_json())  # noqa: E501
 
-    connection = psycopg2.connect(host=DATABASE_URL, sslmode='require')
+    connection = psycopg2.connect(user=DATABASE_USER,
+                                      password=DATABASE_PASSWORD,
+                                      host=DATABASE_HOST,
+                                      port="5432",
+                                      database=DATABASE_NAME)
     cursor = connection.cursor()
 
     try:
