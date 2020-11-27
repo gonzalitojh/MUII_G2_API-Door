@@ -79,7 +79,7 @@ class UpdateDoor(Model):
         """
         return self._name
 
-    @id.setter
+    @name.setter
     def name(self, name: str):
         """Sets the id of this UpdateDoor.
 
