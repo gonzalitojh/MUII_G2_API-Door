@@ -24,10 +24,10 @@ def add_door(door):  # noqa: E501
     if connexion.request.is_json:
         _door = Door.from_dict(connexion.request.get_json())  # noqa: E501
 
-    try:
-        connection = psycopg2.connect(host=DATABASE_URL, sslmode='required')
-        cursor = connection.cursor()
+    connection = psycopg2.connect(host=DATABASE_URL, sslmode='require')
+    cursor = connection.cursor()
 
+    try:
         postgres_insert_query = """ INSERT INTO door (name) VALUES (%s)"""
         cursor.execute(postgres_insert_query, door.name)
 
