@@ -1,11 +1,14 @@
 import connexion
 import six
 
-from swagger_server.database import db
-
 from swagger_server.models.door import Door  # noqa: E501
 from swagger_server.models.update_door import UpdateDoor  # noqa: E501
 from swagger_server import util
+
+import os
+import psycopg2
+
+DATABASE_URL = os.environ['DATABASE_URL']
 
 
 def add_door(door):  # noqa: E501
@@ -21,9 +24,28 @@ def add_door(door):  # noqa: E501
     if connexion.request.is_json:
         _door = Door.from_dict(connexion.request.get_json())  # noqa: E501
 
-    new_door = Door(_door.name)
-    db.session.add(new_door)
-    db.session.commit()
+    try:
+        connection = psycopg2.connect(host=DATABASE_URL, sslmode='required')
+        cursor = connection.cursor()
+
+        postgres_insert_query = """ INSERT INTO door (name) VALUES (%s)"""
+        record_to_insert = (door.name)
+        cursor.execute(postgres_insert_query, record_to_insert)
+
+        connection.commit()
+        count = cursor.rowcount
+        print(count, "Record inserted successfully into mobile table")
+
+    except (Exception, psycopg2.Error) as error:
+        if (connection):
+            print("Failed to insert record into mobile table", error)
+
+    finally:
+        # closing database connection.
+        if (connection):
+            cursor.close()
+            connection.close()
+            print("PostgreSQL connection is closed")
 
     return 'do some magic!'
 
