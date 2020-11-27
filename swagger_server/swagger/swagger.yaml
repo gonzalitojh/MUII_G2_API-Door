@@ -11,7 +11,7 @@ info:
     url: https://creativecommons.org/licenses/by-nc/4.0/
   version: "1.0"
 paths:
-  /door/{id}:
+  /door/{door_id}:
     get:
       tags:
       - Door
@@ -19,7 +19,7 @@ paths:
       description: Get a door state
       operationId: get_door_state
       parameters:
-      - name: id
+      - name: door_id
         in: path
         description: ID of door
         required: true
@@ -61,7 +61,7 @@ paths:
       description: Delete a door
       operationId: delete_door
       parameters:
-      - name: id
+      - name: door_id
         in: path
         description: ID of door
         required: true
@@ -106,7 +106,7 @@ paths:
               schema:
                 title: OK
                 type: string
-                example: '[{"id":"1","name":"Main door","state":"closed"}]'
+                example: '[{"door_id":"1","name":"Main door","state":"closed"}]'
                 x-content-type: application/json
         "404":
           description: Not found response
@@ -198,12 +198,12 @@ components:
     UpdateDoor:
       type: object
       properties:
-        id:
+        door_id:
           type: integer
         state:
           type: string
       example:
-        id: 1
+        door_id: 1
         state: "Open"
       x-body-name: door
   responses:

@@ -57,13 +57,13 @@ def add_door(door):  # noqa: E501
     return 'do some magic!'
 
 
-def delete_door(id):  # noqa: E501
+def delete_door(door_id):  # noqa: E501
     """Delete a door
 
     Delete a door # noqa: E501
 
-    :param id: ID of door
-    :type id: int
+    :param door_id: ID of door
+    :type door_id: int
 
     :rtype: str
     """
@@ -78,7 +78,7 @@ def delete_door(id):  # noqa: E501
     try:
         # Update single record now
         sql_delete_query = """DELETE FROM door WHERE id = %s"""
-        cursor.execute(sql_delete_query, (id,))
+        cursor.execute(sql_delete_query, (door_id,))
         connection.commit()
         count = cursor.rowcount
         print(count, "Record deleted successfully ")
@@ -130,13 +130,13 @@ def get_all_doors_state():  # noqa: E501
     return record
 
 
-def get_door_state(id):  # noqa: E501
+def get_door_state(door_id):  # noqa: E501
     """Get a door state
 
     Get a door state # noqa: E501
 
-    :param id: ID of door
-    :type id: int
+    :param door_id: ID of door
+    :type door_id: int
 
     :rtype: str
     """
@@ -150,7 +150,7 @@ def get_door_state(id):  # noqa: E501
 
     try:
         sql_select_query = """SELECT * FROM door WHERE id = %s"""
-        cursor.execute(sql_select_query, (id,))
+        cursor.execute(sql_select_query, (door_id,))
         record = cursor.fetchall()
 
     except (Exception, psycopg2.Error) as error:

@@ -14,7 +14,7 @@ class UpdateDoor(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, id: int=None, state: str=None):  # noqa: E501
+    def __init__(self, id: int=None, name: str=None, state: str=None):  # noqa: E501
         """UpdateDoor - a model defined in Swagger
 
         :param id: The id of this UpdateDoor.  # noqa: E501
@@ -24,14 +24,17 @@ class UpdateDoor(Model):
         """
         self.swagger_types = {
             'id': int,
+            'name': int,
             'state': str
         }
 
         self.attribute_map = {
             'id': 'id',
+            'name': 'name',
             'state': 'state'
         }
         self._id = id
+        self._name = name
         self._state = state
 
     @classmethod
