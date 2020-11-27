@@ -38,7 +38,7 @@ def add_door(door):  # noqa: E501
     try:
         postgres_insert_query = f""" INSERT INTO door (name) VALUES (%s)"""
         print(door.name)
-        cursor.execute(postgres_insert_query, door.name)
+        cursor.execute(postgres_insert_query, str(door.name))
         cursor.execute(postgres_insert_query, 'try')
 
         connection.commit()
