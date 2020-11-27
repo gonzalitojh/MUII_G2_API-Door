@@ -25,11 +25,13 @@ class Door(Model):
         :type name: str
         """
         self.swagger_types = {
+            'id': int,
             'name': str,
             'state': str
         }
 
         self.attribute_map = {
+            'id': 'id',
             'name': 'name',
             'state': 'state'
         }
