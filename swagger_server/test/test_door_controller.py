@@ -22,6 +22,7 @@ class TestDoorController(BaseTestCase):
         """
         body = Door()
         mocked_add_new_door.assert_not_called()
+        mocked_add_new_door.return_value = None
         response = self.client.open(
             '/door',
             method='POST',
@@ -38,6 +39,7 @@ class TestDoorController(BaseTestCase):
         Delete a door
         """
         mocked_delete_door.assert_not_called()
+        mocked_delete_door.return_value = None
         response = self.client.open(
             '/door/{id}'.format(id=56),
             method='DELETE')
@@ -100,6 +102,7 @@ class TestDoorController(BaseTestCase):
         Update door state
         """
         mocked_update_door_state.assert_not_called()
+        mocked_update_door_state.return_value = None
         body = UpdateDoor()
         response = self.client.open(
             '/door',
