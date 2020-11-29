@@ -53,7 +53,16 @@ class TestDoorController(BaseTestCase):
         """
         mocked_get_all_doors_state.assert_not_called()
         mocked_get_all_doors_state.return_value = [
-
+            [
+                "Living room door",
+                3,
+                "open"
+            ],
+            [
+                "Main door",
+                1,
+                "close"
+            ]
         ]
         response = self.client.open(
             '/door',
@@ -69,7 +78,14 @@ class TestDoorController(BaseTestCase):
         Get a door state
         """
         mocked_get_door_state.assert_not_called()
-        mocked_get_door_state.return_value = []
+        mocked_get_door_state.return_value = [
+            [
+                "Living room door",
+                3,
+                "open"
+            ]
+        ]
+
         response = self.client.open(
             '/door/{id}'.format(id=56),
             method='GET')
@@ -97,4 +113,5 @@ class TestDoorController(BaseTestCase):
 
 if __name__ == '__main__':
     import unittest
+
     unittest.main()
