@@ -25,13 +25,11 @@ class Door(Model):
         :type name: str
         """
         self.swagger_types = {
-            'id': int,
             'name': str,
             'state': str
         }
 
         self.attribute_map = {
-            'id': 'id',
             'name': 'name',
             'state': 'state'
         }
@@ -39,8 +37,7 @@ class Door(Model):
         self._state = 'close'
 
     def __repr__(self):
-        door = {'id': self.id,
-                'name': self.name,
+        door = {'name': self.name,
                 'state': self.state}
         return json.dumps(door)
 
