@@ -20,8 +20,9 @@ def add_door(door):  # noqa: E501
         door = Door.from_dict(connexion.request.get_json())  # noqa: E501
 
     db = PostgresDB()
-    db.add_new_door(door.name)
-
+    error = db.add_new_door(door.name)
+    if error:
+        return error
     return "Door inserted successfully"
 
 
@@ -36,7 +37,9 @@ def delete_door(door_id):  # noqa: E501
     :rtype: str
     """
     db = PostgresDB()
-    db.delete_door(door_id)
+    error = db.delete_door(door_id)
+    if error:
+        return error
     return 'Door deleted successfully'
 
 
@@ -50,6 +53,8 @@ def get_all_doors_state():  # noqa: E501
     """
     db = PostgresDB()
     doors = db.get_all_doors_state()
+    if "Error" in doors:
+        return doors
 
     return jsonify({"doors": doors})
 
@@ -66,6 +71,8 @@ def get_door_state(door_id):  # noqa: E501
     """
     db = PostgresDB()
     door = db.get_door_state(door_id)
+    if "Error" in door:
+        return door
     return jsonify({"door": door})
 
 
@@ -83,5 +90,7 @@ def update_door_state(door):  # noqa: E501
         door = UpdateDoor.from_dict(connexion.request.get_json())  # noqa: E501
 
     db = PostgresDB()
-    db.update_door_state(door.state, door.name)
+    error = db.update_door_state(door.state, door.name)
+    if error:
+        return error
     return 'Door updated successfully'
