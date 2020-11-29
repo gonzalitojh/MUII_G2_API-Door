@@ -55,8 +55,17 @@ def get_all_doors_state():  # noqa: E501
     doors = db.get_all_doors_state()
     if "Error" in doors:
         return doors
+    data = {"doors": []}
 
-    return jsonify({"doors": doors})
+    for row in doors:
+        data['doors'].append(
+            {
+                "id": row[1],
+                "name": row[0],
+                "status": row[2],
+            }
+        )
+    return jsonify(data)
 
 
 def get_door_state(door_id):  # noqa: E501
@@ -73,7 +82,17 @@ def get_door_state(door_id):  # noqa: E501
     door = db.get_door_state(door_id)
     if "Error" in door:
         return door
-    return jsonify({"door": door})
+    data = {"door": []}
+
+    for row in door:
+        data['door'].append(
+            {
+                "id": row[1],
+                "name": row[0],
+                "status": row[2],
+            }
+        )
+    return jsonify(data)
 
 
 def update_door_state(door):  # noqa: E501
