@@ -203,12 +203,12 @@ components:
     UpdateDoor:
       type: object
       properties:
-        door_id:
-          type: integer
+        name:
+          type: string
         state:
           type: string
       example:
-        door_id: 1
+        name: "Door"
         state: "Open"
       x-body-name: door
   responses:
